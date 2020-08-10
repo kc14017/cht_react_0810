@@ -1,0 +1,12 @@
+var s1 = 'qwertyuiop1234567890'
+var a1 = Array.from(s1)
+console.log(typeof a1, a1)
+var a2 = a1.splice(3,5)
+console.log(a2)
+console.log(a1)
+console.log(a2.pop(), a2)
+console.log(a2.pop(), a2)
+console.log(a2.pop(), a2)
+a2.unshift('p')
+console.log(a2)
+console.log(a2.shift(), a2)
