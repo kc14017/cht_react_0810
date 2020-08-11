@@ -27,7 +27,7 @@ var car2 = {
         }, 4000)
     },
     getSpeed4: function () {
-        setTimeout(() => {
+        setTimeout(() => {//透過箭頭方式呼叫可讀到this參數值
             console.log("now using arrow function")
             console.log(this.speed)
         }, 6000)
