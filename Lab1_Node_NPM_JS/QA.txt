@@ -1,0 +1,9 @@
+8/10
+local git 與 global -g差別
+node.js 與 react、jscript 關係
+=>應用
+
+
+8/11
+//不加上__proto__會怎樣?
+HybridCar.prototype.__proto__ = Car.prototype
