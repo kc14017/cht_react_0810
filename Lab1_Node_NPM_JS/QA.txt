@@ -8,3 +8,9 @@ node.js 與 react、jscript 關係
 //不加上__proto__會怎樣?
 HybridCar.prototype.__proto__ = Car.prototype
 何時可以使用callback function
+
+
+8/17
+return value && value.type === 'Buffer' ?
+        Buffer.from(value.data) : value;
+用法
