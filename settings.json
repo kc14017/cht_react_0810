@@ -1,0 +1,5 @@
+{
+    "editor.fontSize": 18,
+    "editor.fontFamily": "'Source Code Variable', 'Courier New', monospace",
+    "emmet.includeLanguages": {"javascript":"javascriptreact"}
+}
