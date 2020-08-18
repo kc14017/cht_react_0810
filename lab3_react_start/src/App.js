@@ -9,8 +9,8 @@ import Counter from './components/Counter';
 import Banner from './components/Banner';
 
 class App extends Component {
-  titleChangeListener = e => {
-    this.setState({ title: e.target.value })
+  titleChangeListener = event => {
+    this.setState({ title: event.target.value })
   }
   state = {
     persons: [
@@ -37,18 +37,26 @@ class App extends Component {
     })
   }
   render() {
+    const style = {
+      background: "yellow",
+      font: "inherit",
+      border: "2px solid red",
+      padding: "4px",
+      cursor: 'pointer'
+    }
+
     return (
       <div className="App">
         <Counter step="2" />
         <h1>{this.state.title}</h1>
         <Banner clickCallback={this.titleChangeListener}
-        name={this.state.title} />
+          name={this.state.title} />
         <Dashboard1 />
         <Dashboard2 />
         {
           // <button onClick={this.changeNameHandler.bind(this, "One Punch Man")}>Change</button>  
         }
-        <button onClick={() => this.changeNameHandler("one Punch Man")}>Change</button>
+        <button style={style} onClick={() => this.changeNameHandler("one Punch Man")}>Change</button>
         <Person
           clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
           name={this.state.persons[0].name}
