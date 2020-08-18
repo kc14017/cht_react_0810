@@ -19,26 +19,31 @@ class App extends Component {
 
     ]
   }
-  changeNameHandler = () => {
+  changeNameHandler = (leaderName) => {
     console.log("change button clicked")
     this.setState({
-      persons: [{ name: "X man", age: 45 },
-      { name: "Captain America", age: 35 },
-      { name: "Iron man", age: 42 },
-      { name: "Thor", age: 200 },
-      { name: "Groot", age: 5 },
-      { name: "Hawk", age: 40 }
+      persons: [
+        { name: leaderName, age: 45 },
+        { name: "Captain America", age: 35 },
+        { name: "Iron man", age: 42 },
+        { name: "Thor", age: 200 },
+        { name: "Groot", age: 5 },
+        { name: "Hawk", age: 40 }
       ]
     })
   }
+
   render() {
     return (
       <div className="App">
         <Counter step="2" />
         <Dashboard1 />
         <Dashboard2 />
-        <button onClick={this.changeNameHandler}>Change</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+        <button onClick={this.changeNameHandler.bind(this, "One Punch Man")}>Change</button>
+        <Person
+          clickCallback={this.changeNameHandler.bind(this,"Peter Pan")}
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age} />
         <Pet name="king" species="cat" />
         <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
         <Person name={this.state.persons[2].name} age={this.state.persons[2].age} >Team Leader</Person>

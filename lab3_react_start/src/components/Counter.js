@@ -9,12 +9,23 @@ export default class Counter extends Component {
         }
     }
     clickHandler = () => {
-        this.setState((prevState, props) => 
-        ({ count: prevState.count + parseInt(props.step) }), () => {
+        // this.setState((prevState) => 
+        // ({ count: prevState.count + 2 }), () => {
+        //     console.log(`callback value = ${this.state.count}`)
+        // })
+
+        // this.setState((prevState, props, dummy) =>
+        //     ({ count: prevState.count + parseInt(props.step) }), () => {
+        //         console.log(`callback value = ${this.state.count}`)
+        //     })
+        this.setState((prevState, props) => {
+            return { count: prevState.count + parseInt(props.step) }
+        }, () => {
             console.log(`callback value = ${this.state.count}`)
         })
+
         console.log(`button clicked ${this.state.count} times`)
-    }
+    }      
     clickHandler10 = () => {
         this.clickHandler()
         this.clickHandler()
