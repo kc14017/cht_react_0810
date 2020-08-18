@@ -7,6 +7,7 @@ import Person from './components/Person';
 import Pet from './components/Pet';
 import Counter from './components/Counter';
 import Banner from './components/Banner';
+import Radium from 'radium'
 
 class App extends Component {
   titleChangeListener = event => {
@@ -51,11 +52,12 @@ class App extends Component {
   render() {
     const style = {
       backgroundColor: "green",
-      color:'white',
+      color: 'white',
       font: "inherit",
       border: "2px solid red",
       padding: "4px",
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ":hover":{backgroundColor:'lightblue',color:'black'}
     }
     let persons = null;
     if (this.state.showPersons === true) {
@@ -68,26 +70,34 @@ class App extends Component {
         })
       }</div>)
       style.backgroundColor = 'red'
-      style.color='black'
+      style.color = 'black'
+    }
+    //let classes = ['blue','bold'].join(' ')
+    const classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('blue')
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold')
     }
     return (
       <div className="App">
         <Counter step="2" />
-        <h1>{this.state.title}</h1>
+        <h1 className={classes.join(' ')}>{this.state.title}</h1>
         <Banner clickCallback={this.titleChangeListener}
           name={this.state.title} />
         <Dashboard1 />
         <Dashboard2 />
-        <button style={style} onClick={() => this.toggleDisplayHandler()}>
+        <button key="btn1" style={style} onClick={() => this.toggleDisplayHandler()}>
           show/hide persons</button>
         {
           // <button onClick={this.changeNameHandler.bind(this, "One Punch Man")}>Change</button>  
         }
-        <button style={style} onClick={() => this.changeNameHandler("one Punch Man")}>Change</button>
+        <button key="btn2" style={style} onClick={() => this.changeNameHandler("one Punch Man")}>Change</button>
         {persons}
       </div>
     );
   }
 }
 
-export default App;
+export default Radium(App);
