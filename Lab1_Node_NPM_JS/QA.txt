@@ -16,3 +16,7 @@ return value && value.type === 'Buffer' ?
 用法
 
 npx 是什麼? 跟 npm 差在哪
+
+8/18
+react setstate previous state?
+counter: this.state.counter + this.props.increment
