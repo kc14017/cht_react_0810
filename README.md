@@ -1,4 +1,5 @@
 # CHT React & Full Stack
+
 ## lab3
 * when proxy is required, use
 ```javascript
@@ -17,4 +18,23 @@ proxyRequest(URL, function (error, response, body) {
         console.log(body)
     }
 })
-``` 
+```
+
+## Using babel
+
+* syntax
+```
+npx babel src\lab1_var_let_const.js
+```
+
+## For spring boot in gradle
+
+### enable intelliJ proxt setting
+
+### add `gradle.properties` under `.gradle`
+```
+systemProp.http.proxyHost=proxy.cht.com.tw
+systemProp.http.proxyPort=8080
+systemProp.https.proxyHost=proxy.cht.com.tw
+systemProp.https.proxyPort=8080
+```
