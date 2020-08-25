@@ -21,4 +21,7 @@ public class ProjectService {
                     upperCaseProjectId));
         }
     }
+    public Iterable<Project> findAllProjects() {
+        return repository.findAll();
+    }
 }
