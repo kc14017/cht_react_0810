@@ -1,7 +1,6 @@
-package com.chtti.fullstack.demo.Backend1;
+package com.chtti.fullstack.demo.Backend1.repository;
 
 import com.chtti.fullstack.demo.Backend1.model.Project;
-import com.chtti.fullstack.demo.Backend1.repository.ProjectRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
