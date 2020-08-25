@@ -48,4 +48,7 @@ public class Project {
         this.updatedAt = new Date();
     }
 
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    private Backlog backlog;
+
 }

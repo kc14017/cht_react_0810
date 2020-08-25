@@ -28,7 +28,7 @@ public class ProjectRestControllerTest {
     @Test
     public void addProjectSuccess() {
         Project project = new Project();
-        project.setProjectIdentifier("ABC1234");
+        project.setProjectIdentifier("project-1");
         project.setDescription("Hi this is my first project");
         project.setProjectName("Demo Project1");
         ResponseEntity<String> response =
@@ -42,7 +42,7 @@ public class ProjectRestControllerTest {
     @Test
     public void getAllProject() {
         Project project = new Project();
-        project.setProjectIdentifier("ABC1234");
+        project.setProjectIdentifier("project-2");
         project.setDescription("Hi this is my first project");
         project.setProjectName("Demo Project1");
         String localURL = String.format("http://localhost:%d/api/project", port);
@@ -54,7 +54,28 @@ public class ProjectRestControllerTest {
                 restTemplate.getForEntity(localURL + "/all", Project[].class);
         Project[] projects = response2.getBody();
         MediaType contentType = response2.getHeaders().getContentType();
-        assertEquals(projects.length, 1);
+        assertThat(contentType).isEqualByComparingTo(MediaType.APPLICATION_JSON);
+        assertThat(response2.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void getProjectByIdentifier() {
+        String projectIdentifier = "project-3";
+        Project project = new Project();
+        project.setProjectIdentifier(projectIdentifier);
+        project.setDescription("Hi this is my first project");
+        project.setProjectName("Demo Project1");
+        String localURL = String.format("http://localhost:%d/api/project", port);
+        ResponseEntity<String> response =
+                restTemplate.postForEntity(localURL,
+                        project, String.class);
+        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        ResponseEntity<Project> response2 =
+                restTemplate.getForEntity(localURL + "/" + projectIdentifier,
+                        Project.class);
+        Project getBackProject = response2.getBody();
+        MediaType contentType = response2.getHeaders().getContentType();
+        assertEquals(getBackProject.getProjectIdentifier(), projectIdentifier.toUpperCase());
         assertThat(contentType).isEqualByComparingTo(MediaType.APPLICATION_JSON);
         assertThat(response2.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
     }
@@ -62,9 +83,10 @@ public class ProjectRestControllerTest {
     @Test
     public void addProjectMissingName() {
         Project project = new Project();
-        project.setProjectIdentifier("ABC1234");
+        project.setProjectIdentifier("project-4");
         project.setDescription("Hi this is my first project");
         //project.setProjectName("Demo Project1");
+
         ResponseEntity<Map> response =
                 restTemplate.postForEntity(String.format("http://localhost:%d/api/project", port),
                         project, Map.class);
@@ -78,7 +100,7 @@ public class ProjectRestControllerTest {
     @Test
     public void addProjectDuplicateId() {
         Project project = new Project();
-        project.setProjectIdentifier("ABC1234");
+        project.setProjectIdentifier("project_id5");
         project.setDescription("Hi this is my first project");
         project.setProjectName("Demo Project1");
         ResponseEntity<Map> response =
@@ -95,5 +117,4 @@ public class ProjectRestControllerTest {
 
 
     }
-
 }
