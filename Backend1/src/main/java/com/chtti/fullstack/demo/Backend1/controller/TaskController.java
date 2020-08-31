@@ -2,10 +2,14 @@ package com.chtti.fullstack.demo.Backend1.controller;
 
 import com.chtti.fullstack.demo.Backend1.model.ProjectTask;
 import com.chtti.fullstack.demo.Backend1.service.ProjectTaskService;
+import com.chtti.fullstack.demo.Backend1.ulility.MapValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/task")
@@ -13,6 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class TaskController {
     @Autowired
     private ProjectTaskService projectTaskService;
+
+    @PatchMapping("")
+    public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask projectTask,
+                                               BindingResult result) {
+        ResponseEntity<?> errorMap = MapValidationError.MapValidation(result);
+        if (errorMap != null) {
+            return errorMap;
+        }
+        ProjectTask updateTask = projectTaskService.updateByProjectSequence(projectTask);
+        return new ResponseEntity<>(updateTask, HttpStatus.OK);
+    }
 
     @GetMapping("/{task_id}")
     public ResponseEntity<?> getProjectTask(@PathVariable String task_id) {

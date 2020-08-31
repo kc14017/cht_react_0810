@@ -81,4 +81,12 @@ public class ProjectTaskService {
         }
         return task;
     }
+
+    public ProjectTask updateByProjectSequence(ProjectTask updateTask) {
+        Backlog backlog =
+                backlogRepository.findByProjectIdentifier(updateTask.getProjectIdentifier());
+        updateTask.setBacklog(backlog);
+        return projectTaskRepository.save(updateTask);
+
+    }
 }
