@@ -2,6 +2,7 @@ package com.chtti.fullstack.demo.Backend1.service;
 
 import com.chtti.fullstack.demo.Backend1.exceptions.ProjectIdException;
 import com.chtti.fullstack.demo.Backend1.exceptions.ProjectIdIncorrectException;
+import com.chtti.fullstack.demo.Backend1.exceptions.TaskNotFoundException;
 import com.chtti.fullstack.demo.Backend1.model.Backlog;
 import com.chtti.fullstack.demo.Backend1.model.Project;
 import com.chtti.fullstack.demo.Backend1.model.ProjectTask;
@@ -66,12 +67,18 @@ public class ProjectTaskService {
     public Iterable<ProjectTask> findTaskById(String backlog_id) {
         Project project = projectRepository.findByProjectIdentifier(backlog_id);
         if (project == null) {
-            String message = String.format("project id:%s does not exist!",backlog_id);
+            String message = String.format("project id:%s does not exist!", backlog_id);
             throw new ProjectIdIncorrectException(message);
         }
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
     }
+
     public ProjectTask findTaskByProjectSequence(String task_id) {
-        return projectTaskRepository.findByProjectSequence(task_id);
+        ProjectTask task = projectTaskRepository.findByProjectSequence(task_id);
+        if (task == null) {
+            String message = String.format("Task with task_id:%s does not exist", task_id);
+            throw new TaskNotFoundException(message);
+        }
+        return task;
     }
 }
