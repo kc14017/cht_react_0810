@@ -5,7 +5,10 @@ import com.chtti.fullstack.demo.Backend1.model.Backlog;
 import com.chtti.fullstack.demo.Backend1.model.Project;
 import com.chtti.fullstack.demo.Backend1.repository.BacklogRepository;
 import com.chtti.fullstack.demo.Backend1.repository.ProjectRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,7 +38,12 @@ public class ProjectService {
         }
     }
 
-    public Iterable<Project> findAllProjects() {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ProjectService.class);
+
+    @Cacheable(value = "projects", condition = "!#noCache")
+    public Iterable<Project> findAllProjects(boolean noCache) {
+        LOGGER.info("get all projects from repository");
         return repository.findAll();
     }
 
