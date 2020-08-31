@@ -89,4 +89,9 @@ public class ProjectTaskService {
         return projectTaskRepository.save(updateTask);
 
     }
+
+    public void deleteTaskByProjctSequence(String task_id) {
+        ProjectTask task = findTaskByProjectSequence(task_id);
+        projectTaskRepository.delete(task);
+    }
 }

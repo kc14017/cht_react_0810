@@ -38,3 +38,10 @@ systemProp.http.proxyPort=8080
 systemProp.https.proxyHost=proxy.cht.com.tw
 systemProp.https.proxyPort=8080
 ```
+## for docker image in CHT
+### Docker UI/Settings/Resources/Proxies
+```
+proxy.cht.com.tw:8080
+proxy.cht.com.tw:8080
+localhost,127.0.0.1
+```
