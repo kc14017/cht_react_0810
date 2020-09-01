@@ -1,7 +1,9 @@
 const redux = require('redux')
+const reduxLogger = require('redux-logger')
 const createStore = redux.createStore
 const applyMiddleware = redux.applyMiddleware
 const thunkMiddleware = require('redux-thunk').default
+const logger = reduxLogger.createLogger()
 const axios = require('axios')
 //state
 const initState = {
@@ -75,7 +77,6 @@ const fetchProjects = () => {
 
 
 //store
-const store = createStore(reducer, applyMiddleware(thunkMiddleware))
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger))
 console.log("create async api call...")
-store.subscribe(() => { console.log(store.getState()) })
 store.dispatch(fetchProjects())
